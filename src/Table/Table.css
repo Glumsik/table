@@ -1,0 +1,29 @@
+
+.up
+{
+    /* position: relative; */
+    background-image: url('../img/up.svg');
+    /* background-color: ghostwhite; */
+}
+
+/* .up::after
+{
+
+    height: 20px;
+    width: 20px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    content: " ";
+    display: block;
+    /* background: black; */
+    /* background-image: url('../img/2018_social_media_popular_app_logo-whatsapp-512.png');
+} */ 
+
+.down
+{
+
+    background-color: ghostwhite;
+
+    /* background-image: url('../img/2018_social_media_popular_app_logo-whatsapp-512.png'); */
+}
