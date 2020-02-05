@@ -6,25 +6,25 @@ export default (props) => (
         <thead>
         <tr>
             <th onClick={props.onSort.bind(null, 'id')}>
-                ID {props.sortBy === 'id' ? <small>{props.sort}</small> : null}
+                ID {props.sortBy === 'id' ? <small>{props.sort === 'asc' ? 'rise' : 'wane'}</small> : null}
             </th>
             <th onClick={props.onSort.bind(null, 'firstName')}>
-                First Name {props.sortBy === 'firstName' ? <small>{props.sort}</small> : null}
+                First Name {props.sortBy === 'firstName' ? <small>{props.sort === 'asc' ? 'rise' : 'wane'}</small> : null}
             </th>
             <th onClick={props.onSort.bind(null, 'lastName')}>
-                Last Name {props.sortBy === 'lastName' ? <small>{props.sort}</small> : null}
+                Last Name {props.sortBy === 'lastName' ? <small>{props.sort === 'asc' ? 'rise' : 'wane'}</small> : null}
             </th>
             <th onClick={props.onSort.bind(null, 'email')}>
-                E-mail {props.sortBy === 'email' ? <small>{props.sort}</small> : null}
+                E-mail {props.sortBy === 'email' ? <small>{props.sort === 'asc' ? 'rise' : 'wane'}</small> : null}
             </th>
             <th onClick={props.onSort.bind(null, 'phone')}>
-                Phone {props.sortBy === 'phone' ? <small>{props.sort}</small> : null}
+                Phone {props.sortBy === 'phone' ? <small>{props.sort === 'asc' ? 'rise' : 'wane'}</small> : null}
             </th>
         </tr>
         </thead>
         <tbody>
             { 
-                props.dataTable.map((item, index) =>(
+                props.dataTable.map((item, index) => (
                     <tr key={item.id + index + item.phone} onClick={props.rowSelect.bind(null, item)}>
                         <td>{item.id}</td>
                         <td>{item.firstName}</td>

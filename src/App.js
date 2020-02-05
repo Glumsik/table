@@ -21,14 +21,32 @@ class App extends React.Component
     }
 
 
-    fetchData = async () => 
+    fetchData = async (URL) => 
     {
       loadProgressBar();
 
-      const response = await axios.get('http://www.filltext.com/?rows=32&id={number|1000}&firstName={firstName}&lastName={lastName}&email={email}&phone={phone|(xxx)xxx-xx-xx}&address={addressObject}&description={lorem|32}');
+      const response = await axios.get(URL);
 
-      this.setState({data: response.data})
+      this.setState(
+        {
+          data: response.data,
+          sortBy: '',
+          selectRow: null
+        })
     };
+
+
+    smallURL = () =>
+    {
+      this.fetchData('http://www.filltext.com/?rows=32&id={number|1000}&firstName={firstName}&lastName={lastName}&email={email}&phone={phone|(xxx)xxx-xx-xx}&address={addressObject}&description={lorem|32}')
+    }
+
+
+    bigURL = () =>
+    {
+      this.fetchData(' http://www.filltext.com/?rows=1000&id={number|1000}&firstName={firstName}&delay=3&lastName={lastName}&email={email}&phone={phone|(xxx)xxx-xx-xx}&address={addressObject}&description={lorem|32}')
+    }
+
   
     onSort = (sortField) => 
     {
@@ -36,11 +54,12 @@ class App extends React.Component
       const sortType = this.state.sort === 'asc' ? 'desc' : 'asc';
       const orderedData = _.orderBy(this.state.data, sortField, sortType);
 
-      this.setState({
-        data: orderedData,
-        sort: sortType,
-        sortBy: sortField
-      })
+      this.setState(
+        {
+          data: orderedData,
+          sort: sortType,
+          sortBy: sortField
+        })
     }
 
 
@@ -55,9 +74,8 @@ class App extends React.Component
     {
         return (
           <div>
-          <button className="fetch-button" onClick={this.fetchData}>
-              Fetch Data
-          </button>
+          <button className="fetch-button" onClick={this.smallURL}>Fetch Data small Url</button>
+          <button className="fetch-button" onClick={this.bigURL}>Fetch Data big Url</button>
           <Table dataTable={this.state.data} onSort={this.onSort} sortBy={this.state.sortBy} sort={this.state.sort} rowSelect={this.rowSelect}/>
           {this.state.selectRow ? <Row person={this.state.selectRow} /> : null}
           </div>
