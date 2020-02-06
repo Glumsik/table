@@ -5,19 +5,19 @@ export default (props) => (
     <table className="table table-striped table-dark">
         <thead>
         <tr>
-            <th onClick={props.onSort.bind(null, 'id')}>
+            <th onClick={() => props.onSort('id')}>
                 ID {props.sortBy === 'id' ? <small>{props.sort === 'asc' ? 'rise' : 'wane'}</small> : null}
             </th>
-            <th onClick={props.onSort.bind(null, 'firstName')}>
+            <th onClick={() => props.onSort('firstName')}>
                 First Name {props.sortBy === 'firstName' ? <small>{props.sort === 'asc' ? 'rise' : 'wane'}</small> : null}
             </th>
-            <th onClick={props.onSort.bind(null, 'lastName')}>
+            <th onClick={() => props.onSort('lastName')}>
                 Last Name {props.sortBy === 'lastName' ? <small>{props.sort === 'asc' ? 'rise' : 'wane'}</small> : null}
             </th>
-            <th onClick={props.onSort.bind(null, 'email')}>
+            <th onClick={() => props.onSort('email')}>
                 E-mail {props.sortBy === 'email' ? <small>{props.sort === 'asc' ? 'rise' : 'wane'}</small> : null}
             </th>
-            <th onClick={props.onSort.bind(null, 'phone')}>
+            <th onClick={() => props.onSort('phone')}>
                 Phone {props.sortBy === 'phone' ? <small>{props.sort === 'asc' ? 'rise' : 'wane'}</small> : null}
             </th>
         </tr>
