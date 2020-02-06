@@ -6,26 +6,23 @@ import Table from './Table/Table.js';
 import _ from 'lodash';
 import ReactPaginate from 'react-paginate'; 
 import Row from './Row/Row'
-import Input from './FormInput/Input'
+import {Input} from './FormInput/Input'
+import {Search} from './Search/Search'
 
 class App extends React.Component
 {
   constructor()
     {
-        super();
-        this.state =
-          {
-            textId: null,
-            textFirstName: null,
-            textLastName: null,
-            textEmail: null,
-            textPhone: null,
-            data: [],
-            sort: 'asc',
-            sortBy: '',
-            selectRow: null,
-            currentPage: 0,
-          };
+      super();
+      this.state =
+      {
+        data: [],
+        sort: 'asc',
+        sortBy: '',
+        selectRow: null,
+        currentPage: 0,
+        searchInput: null
+      };
     }
 
 
@@ -36,11 +33,12 @@ class App extends React.Component
       const response = await axios.get(URL);
 
       this.setState(
-        {
-          data: response.data,
-          sortBy: '',
-          selectRow: null
-        })
+      {
+        data: response.data,
+        sortBy: '',
+        currentPage: 0,
+        selectRow: null
+      })
     };
 
 
@@ -72,15 +70,19 @@ class App extends React.Component
 
     rowSelect = (row) => 
     {
+      if(Object.keys(row).length < 7)
+      {
+        return
+      }
       this.setState({selectRow: row})
     }
 
 
-    addRow = () =>
+    addRow = (newRow) =>
     {
       const cloneData = this.state.data.concat(); 
-
-      cloneData.unshift({id: this.state.textId, firstName: this.state.textFirstName, lastName: this.state.textLastName, email: this.state.textEmail, phone: this.state.textPhone})
+      
+      cloneData.unshift(newRow)
 
       this.setState(
         {
@@ -89,70 +91,50 @@ class App extends React.Component
     }
 
 
-    checkInputID = (e) =>
-    {
-      this.setState(
-        {
-          textId: e.target.value
-        });
-    }
-
-
-    checkInputFirstName = (e) =>
-    {
-      this.setState(
-        {
-          textFirstName: e.target.value
-        });
-    }
-
-
-    checkInputLastName = (e) =>
-    {
-      this.setState(
-        {
-          textLastName: e.target.value
-        });
-    }
-
-
-    checkInputEmail = (e) =>
-    {
-      this.setState(
-        {
-          textEmail: e.target.value
-        });
-    }
-     
-
-    checkInputPhone = (e) =>
-    {
-      this.setState(
-        {
-          textPhone: e.target.value
-        });
-    }
-
-
     pageSelect = ({selected}) => 
     {
       this.setState({currentPage: selected})
     }
-    
+
+
+    searchButton = (search) =>
+    {
+      this.setState({searchInput: search})
+    }
+
+
+    getSearchData =() =>
+    {
+      const search = this.state.searchInput 
+
+      if (!search) 
+      {
+        return this.state.data
+      }
+
+      return this.state.data.filter(item => {
+        return (item['id']+'').includes(search)
+      || item['firstName'].toLowerCase().includes(search.toLowerCase())
+      || item['lastName'].toLowerCase().includes(search.toLowerCase())
+      || item['email'].toLowerCase().includes(search.toLowerCase())
+      })
+     
+    }
+
 
     render()
     {
-        const pageSize = 10;
-        const pageCount = Math.ceil(this.state.data.length / pageSize)
-        const cloneData = this.state.data.concat(); 
+        const pageSize = 15;
+        const pageCount = Math.ceil(this.getSearchData().length / pageSize)
+        const cloneData = this.getSearchData().concat(); 
         const display = _.chunk(cloneData, pageSize)[this.state.currentPage] 
-
         
         return (
           <div>
 
-            <Input checkInputID={this.checkInputID}  checkInputFirstName={this.checkInputFirstName} checkInputLastName={this.checkInputLastName} checkInputEmail={this.checkInputEmail} checkInputPhone={this.checkInputPhone}/>
-            <button className="fetch-button" onClick={this.addRow}>Add Row</button>
+            <Input addRow={this.addRow}/>
+
+            <Search searchInput={this.searchInput} searchButton={this.searchButton}/>
 
             <button className="fetch-button" onClick={this.smallURL}>Fetch Data small Url</button>
             <button className="fetch-button" onClick={this.bigURL}>Fetch Data big Url</button>
@@ -179,6 +161,7 @@ class App extends React.Component
                 nextClassName="page-item"
                 previousLinkClassName="page-link"
                 nextLinkClassName="page-link"
+                forcePage={this.state.currentPage}
               /> : null
            }
 
