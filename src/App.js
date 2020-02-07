@@ -21,7 +21,8 @@ class App extends React.Component
         sortBy: '',
         selectRow: null,
         currentPage: 0,
-        searchInput: null
+        searchInput: null,
+        addRowButton: false
       };
     }
 
@@ -122,6 +123,12 @@ class App extends React.Component
     }
 
 
+    showInputRow = () =>
+    {
+      this.setState({addRowButton: !this.state.addRowButton})
+    }
+
+
     render()
     {
         const pageSize = 15;
@@ -130,18 +137,28 @@ class App extends React.Component
         const display = _.chunk(cloneData, pageSize)[this.state.currentPage] 
         
         return (
-          <div>
+          <div className="outerContainer">
+ 
+          <div className="innerContainer">
+              <div className="outerButtonFetch">
+                  <button className="btn btn-dark btn-lg buttonFetch" onClick={this.smallURL}>Fetch Data small Url</button>
+                  <button className="btn btn-dark btn-lg buttonFetch" onClick={this.bigURL}>Fetch Data big Url</button>
+              </div>
+              
+              <div className="outerRowButton">
+                  <button className="btn btn-info" onClick={this.showInputRow}>add row</button>
+              </div>
+          </div>
+           
 
-            <Input addRow={this.addRow}/>
+            {(this.state.addRowButton) ? <Input addRow={this.addRow}/> : null}
 
-            <Search searchInput={this.searchInput} searchButton={this.searchButton}/>
+            <div className="containerTable">
+                <Search searchInput={this.searchInput} searchButton={this.searchButton}/>
+                <Table dataTable={(display !== undefined) ? display : []} onSort={this.onSort} sortBy={this.state.sortBy} sort={this.state.sort} rowSelect={this.rowSelect}/>
+            </div>
+            
 
-            <button className="fetch-button" onClick={this.smallURL}>Fetch Data small Url</button>
-            <button className="fetch-button" onClick={this.bigURL}>Fetch Data big Url</button>
-
-            <Table dataTable={(display !== undefined) ? display : []} onSort={this.onSort} sortBy={this.state.sortBy} sort={this.state.sort} rowSelect={this.rowSelect}/>
-
-          
             {
               this.state.data.length > pageSize 
               ? <ReactPaginate

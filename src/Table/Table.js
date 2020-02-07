@@ -3,10 +3,10 @@ import './Table.css';
 
 export default (props) => (
     <table className="table table-striped table-dark">
-        <thead>
+        <thead> 
         <tr>
             <th onClick={() => props.onSort('id')}>
-                ID {props.sortBy === 'id' ? <small>{props.sort === 'asc' ? 'rise' : 'wane'}</small> : null}
+                ID {props.sortBy === 'id' ? <small className='up'>{props.sort === 'asc' ? 'rise' : 'wane'}</small> : null}
             </th>
             <th onClick={() => props.onSort('firstName')}>
                 First Name {props.sortBy === 'firstName' ? <small>{props.sort === 'asc' ? 'rise' : 'wane'}</small> : null}

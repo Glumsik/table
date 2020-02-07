@@ -26,9 +26,9 @@ class Search extends React.Component
         return (
             <div>
                 <div className="input-group mb-3">
-                    <input type="text" className="form-control" placeholder="Search" aria-label="Search" aria-describedby="basic-addon2" onChange={(e) => this.searchInput(e)}></input>
+                    <input type="search" className="form-control" placeholder="Search" aria-label="Search" aria-describedby="basic-addon2" onChange={(e) => this.searchInput(e)}></input>
                     <div className="input-group-append">
-                        <button className="btn btn-outline-secondary" type="button" onClick={() => this.props.searchButton(this.state.searchInput)}>Search</button>
+                        <button className="btn btn-secondary" type="button" onClick={() => this.props.searchButton(this.state.searchInput)}>Search</button>
                     </div>
                 </div>
             </div>
