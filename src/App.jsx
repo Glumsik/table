@@ -1,13 +1,14 @@
 import React from 'react';
 import axios from 'axios';
-import {loadProgressBar} from 'axios-progress-bar'
+import {loadProgressBar} from 'axios-progress-bar';
 import './App.css';
-import Table from './Table/Table.js';
+import Table from './Table/Table';
 import _ from 'lodash';
 import ReactPaginate from 'react-paginate'; 
-import Row from './Row/Row'
-import {Input} from './FormInput/Input'
-import {Search} from './Search/Search'
+import Row from './Row/Row';
+import {Input} from './FormInput/Input';
+import {Search} from './Search/Search';
+
 
 class App extends React.Component
 {
@@ -100,7 +101,7 @@ class App extends React.Component
 
     searchButton = (search) =>
     {
-      this.setState({searchInput: search})
+      this.setState({searchInput: search, currentPage: 0})
     }
 
 
@@ -132,10 +133,10 @@ class App extends React.Component
     render()
     {
         const pageSize = 15;
-        const pageCount = Math.ceil(this.getSearchData().length / pageSize)
+        const pageCount = Math.ceil(this.getSearchData().length / pageSize);
         const cloneData = this.getSearchData().concat(); 
-        const display = _.chunk(cloneData, pageSize)[this.state.currentPage] 
-        
+        const display = _.chunk(cloneData, pageSize)[this.state.currentPage];
+
         return (
           <div className="outerContainer">
  
@@ -160,7 +161,7 @@ class App extends React.Component
             
 
             {
-              this.state.data.length > pageSize 
+              this.state.data.length > pageSize
               ? <ReactPaginate
                 previousLabel={'previous'}
                 nextLabel={'next'}

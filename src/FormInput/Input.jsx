@@ -22,18 +22,22 @@ class Input extends React.Component
 
     checkInputID = (e) =>
     {
-      if(!( /\D/g).test(e.target.value))
+      if(e.target.value.length > 0)
+      {
+        if(!( /\D/g).test(e.target.value))
+        {
+          this.setState(
+            {
+              textId: e.target.value,
+              textIdCorrect: true
+            });
+        }
+      }
+      else
       {
         this.setState(
           {
             textId: e.target.value,
-            textIdCorrect: true
-          });
-      }
-      if(e.target.value.length === 0)
-      {
-        this.setState(
-          {
             textIdCorrect: false
           });
       }
@@ -42,19 +46,23 @@ class Input extends React.Component
 
     checkInputFirstName = (e) =>
     {
-      if((/^[A-ZА-ЯЁ\s-]+$/i).test(e.target.value))
+      if(e.target.value.length > 0)
+      {
+        if((/^[A-ZА-ЯЁ\s-]+$/i).test(e.target.value))
+        {
+          this.setState(
+            {
+              textFirstName: e.target.value,
+              textFirstNameCorrect: true
+            });
+        }
+      }
+      else
       {
         this.setState(
           {
             textFirstName: e.target.value,
-            textFirstNameCorrect: true
-          });
-      }
-      if(e.target.value.length === 0)
-      {
-        this.setState(
-          {
-            textIdCorrect: false
+            textFirstNameCorrect: false
           });
       }
     }
@@ -62,18 +70,22 @@ class Input extends React.Component
 
     checkInputLastName = (e) =>
     {
-      if((/^[A-ZА-ЯЁ\s-]+$/i).test(e.target.value))
+      if(e.target.value.length > 0)
+      {
+        if((/^[A-ZА-ЯЁ\s-]+$/i).test(e.target.value))
+        {
+          this.setState(
+            {
+              textLastName: e.target.value,
+              textLastNameCorrect: true
+            });
+        }
+      }
+      else
       {
         this.setState(
           {
             textLastName: e.target.value,
-            textLastNameCorrect: true
-          });
-      }
-      if(e.target.value.length === 0)
-      {
-        this.setState(
-          {
             textLastNameCorrect: false
           });
       }
@@ -94,6 +106,7 @@ class Input extends React.Component
       {
         this.setState(
           {
+            textEmail: e.target.value,
             textEmailCorrect: false
           });
       }
@@ -102,18 +115,22 @@ class Input extends React.Component
 
     checkInputPhone = (e) =>
     {
-      if(!( /\D/g).test(e.target.value))
+      if(e.target.value.length > 0)
+      {
+        if(!( /\D/g).test(e.target.value))
+        {
+          this.setState(
+            {
+              textPhone: e.target.value,
+              textPhoneCorrect: true
+            });
+        }
+      }
+      else
       {
         this.setState(
           {
             textPhone: e.target.value,
-            textPhoneCorrect: true
-          });
-      }
-      if(e.target.value.length === 0)
-      {
-        this.setState(
-          {
             textPhoneCorrect: false
           });
       }
@@ -124,7 +141,6 @@ class Input extends React.Component
     { 
         const correctInputs = (this.state.textIdCorrect && this.state.textFirstNameCorrect && this.state.textLastNameCorrect && this.state.textEmailCorrect && this.state.textPhoneCorrect);
         const inputData = {id: this.state.textId, firstName: this.state.textFirstName, lastName: this.state.textLastName, email: this.state.textEmail, phone: this.state.textPhone} ;
-        console.log(this.state.textIdCorrect)
         return (
             <div className="formInput">
             <form>

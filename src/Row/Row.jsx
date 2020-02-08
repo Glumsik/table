@@ -1,4 +1,5 @@
 import React from 'react';
+import './Row.css'
 
 export default ({person}) => 
 (
@@ -6,7 +7,7 @@ export default ({person}) =>
         <p>Выбран пользователь <b>{person.firstName + ' ' + person.lastName}</b></p>
         <p>
         Описание: <br />
-        <textarea style={{width: "300px", height: "100px"}} defaultValue={person.description} />
+        <textarea defaultValue={person.description} />
         </p>
         <p>Адрес проживания: <b>{person.address.streetAddress}</b></p>
         <p>Город: <b>{person.address.city}</b></p>

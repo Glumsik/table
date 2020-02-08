@@ -6,26 +6,26 @@ export default (props) => (
         <thead> 
         <tr className="tableHead">
             <th onClick={() => props.onSort('id')}>
-                ID {props.sortBy === 'id' ? <small className='up'>{props.sort === 'asc' ? 'rise' : 'wane'}</small> : null}
+                ID {props.sortBy === 'id' ? <div className={props.sort === 'asc' ? 'up' : 'down'}></div> : null}
             </th>
             <th onClick={() => props.onSort('firstName')}>
-                First Name {props.sortBy === 'firstName' ? <small>{props.sort === 'asc' ? 'rise' : 'wane'}</small> : null}
+                First Name {props.sortBy === 'firstName' ? <div className={props.sort === 'asc' ? 'up' : 'down'}></div> : null}
             </th>
             <th onClick={() => props.onSort('lastName')}>
-                Last Name {props.sortBy === 'lastName' ? <small>{props.sort === 'asc' ? 'rise' : 'wane'}</small> : null}
+                Last Name {props.sortBy === 'lastName' ? <div className={props.sort === 'asc' ? 'up' : 'down'}></div> : null}
             </th>
             <th onClick={() => props.onSort('email')}>
-                E-mail {props.sortBy === 'email' ? <small>{props.sort === 'asc' ? 'rise' : 'wane'}</small> : null}
+                E-mail {props.sortBy === 'email' ? <div className={props.sort === 'asc' ? 'up' : 'down'}></div> : null}
             </th>
             <th onClick={() => props.onSort('phone')}>
-                Phone {props.sortBy === 'phone' ? <small>{props.sort === 'asc' ? 'rise' : 'wane'}</small> : null}
+                Phone {props.sortBy === 'phone' ? <div className={props.sort === 'asc' ? 'up' : 'down'}></div> : null}
             </th>
         </tr>
         </thead>
         <tbody>
             { 
                 props.dataTable.map((item, index) => (
-                    <tr key={item.id + index + item.phone} onClick={props.rowSelect.bind(null, item)}>
+                    <tr key={item.id + index + item.phone} onClick={() => props.rowSelect(item)}>
                         <td>{item.id}</td>
                         <td>{item.firstName}</td>
                         <td>{item.lastName}</td>

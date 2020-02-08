@@ -6,6 +6,7 @@
 .tableHead th
 {
   border: 1px solid rgba(0, 0, 0, 0.39) !important;
+  position: relative;
 }
 
 th,
@@ -15,4 +16,20 @@ li
   cursor: pointer;
 }
 
+.up,
+.down
+{
+  position: absolute;
+  top: 15px;
+  right: 0;
+  width: 18px;
+  height: 18px;
+  background-image: URL('../img/up.png');
+  background-repeat: no-repeat;
+}
+
+.down
+{
+  background-image: URL('../img/down.png');
+}
 
