@@ -146,7 +146,7 @@ class App extends React.Component
               </div>
               
               <div className="outerRowButton">
-                  <button className="btn btn-info" onClick={this.showInputRow}>add row</button>
+                  <button className="btn btn-info buttonRow" onClick={this.showInputRow}>add row</button>
               </div>
           </div>
            

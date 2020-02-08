@@ -1,9 +1,18 @@
-/* 
-small
+.tableHead
 {
-  height: 500px;
-  width: 500px;
-    background-image: URL("../img/long-arrow-pointing-up.svg");
-    background-repeat: no-repeat;
-} */
-  
+  background-color: #17a2b85c;
+}
+
+.tableHead th
+{
+  border: 1px solid rgba(0, 0, 0, 0.39) !important;
+}
+
+th,
+td,
+li
+{
+  cursor: pointer;
+}
+
+

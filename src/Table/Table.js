@@ -2,9 +2,9 @@ import React from 'react';
 import './Table.css';
 
 export default (props) => (
-    <table className="table table-striped table-dark">
+    <table className="table table-bordered">
         <thead> 
-        <tr>
+        <tr className="tableHead">
             <th onClick={() => props.onSort('id')}>
                 ID {props.sortBy === 'id' ? <small className='up'>{props.sort === 'asc' ? 'rise' : 'wane'}</small> : null}
             </th>

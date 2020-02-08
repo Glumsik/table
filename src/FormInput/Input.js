@@ -7,11 +7,11 @@ class Input extends React.Component
         super();
         this.state =
         {
-            textId: null,
-            textFirstName: null,
-            textLastName: null,
-            textEmail: null,
-            textPhone: null,
+            textId: '',
+            textFirstName: '',
+            textLastName: '',
+            textEmail: '',
+            textPhone: '',
             textIdCorrect: false,
             textFirstNameCorrect: false,
             textLastNameCorrect: false,
@@ -22,7 +22,7 @@ class Input extends React.Component
 
     checkInputID = (e) =>
     {
-      if(e.target.value.length > 0)
+      if(!( /\D/g).test(e.target.value))
       {
         this.setState(
           {
@@ -30,7 +30,7 @@ class Input extends React.Component
             textIdCorrect: true
           });
       }
-      else
+      if(e.target.value.length === 0)
       {
         this.setState(
           {
@@ -42,7 +42,7 @@ class Input extends React.Component
 
     checkInputFirstName = (e) =>
     {
-      if(e.target.value.length > 0)
+      if((/^[A-ZА-ЯЁ\s-]+$/i).test(e.target.value))
       {
         this.setState(
           {
@@ -50,7 +50,7 @@ class Input extends React.Component
             textFirstNameCorrect: true
           });
       }
-      else
+      if(e.target.value.length === 0)
       {
         this.setState(
           {
@@ -62,7 +62,7 @@ class Input extends React.Component
 
     checkInputLastName = (e) =>
     {
-      if(e.target.value.length > 0)
+      if((/^[A-ZА-ЯЁ\s-]+$/i).test(e.target.value))
       {
         this.setState(
           {
@@ -70,7 +70,7 @@ class Input extends React.Component
             textLastNameCorrect: true
           });
       }
-      else
+      if(e.target.value.length === 0)
       {
         this.setState(
           {
@@ -102,7 +102,7 @@ class Input extends React.Component
 
     checkInputPhone = (e) =>
     {
-      if(e.target.value.length > 0)
+      if(!( /\D/g).test(e.target.value))
       {
         this.setState(
           {
@@ -110,7 +110,7 @@ class Input extends React.Component
             textPhoneCorrect: true
           });
       }
-      else
+      if(e.target.value.length === 0)
       {
         this.setState(
           {
@@ -124,33 +124,34 @@ class Input extends React.Component
     { 
         const correctInputs = (this.state.textIdCorrect && this.state.textFirstNameCorrect && this.state.textLastNameCorrect && this.state.textEmailCorrect && this.state.textPhoneCorrect);
         const inputData = {id: this.state.textId, firstName: this.state.textFirstName, lastName: this.state.textLastName, email: this.state.textEmail, phone: this.state.textPhone} ;
+        console.log(this.state.textIdCorrect)
         return (
-            <div>
+            <div className="formInput">
             <form>
     
                 <div className="form-group">
                     <label htmlFor="inputID">ID</label>
-                    <input type="text" className="form-control" id="inputID" placeholder="ID" onChange={(e) => this.checkInputID(e)}></input>
+                    <input type="text" className="form-control" id="inputID" placeholder="ID" value={this.state.textId} onChange={(e) => this.checkInputID(e)}></input>
                 </div>
 
                 <div className="form-group">
                     <label htmlFor="FirstName">First Name</label>
-                    <input type="text" className="form-control" id="FirstName" placeholder="First Name" onChange={(e) => this.checkInputFirstName(e)}></input>
+                    <input type="text" className="form-control" id="FirstName" placeholder="First Name" value={this.state.textFirstName} onChange={(e) => this.checkInputFirstName(e)}></input>
                 </div>
 
                 <div className="form-group">
                     <label htmlFor="LastName">Last Name</label>
-                    <input type="text" className="form-control" id="LastName" placeholder="Last Name" onChange={(e) => this.checkInputLastName(e)}></input>
+                    <input type="text" className="form-control" id="LastName" placeholder="Last Name" value={this.state.textLastName} onChange={(e) => this.checkInputLastName(e)}></input>
                 </div>
 
                 <div className="form-group">
                     <label htmlFor="E-mail">E-mail</label>
-                    <input type="email" className="form-control" id="E-mail" placeholder="E-mail" onChange={(e) => this.checkInputEmail(e)}></input>
+                    <input type="email" className="form-control" id="E-mail" placeholder="E-mail" value={this.state.textEmail} onChange={(e) => this.checkInputEmail(e)}></input>
                 </div>
 
                 <div className="form-group">
                     <label htmlFor="Phone">Phone</label>
-                    <input type="tel" className="form-control" id="Phone" placeholder="(000)000-0000" onChange={(e) => this.checkInputPhone(e)}></input>
+                    <input type="tel" className="form-control" id="Phone" placeholder="(000)000-0000" value={this.state.textPhone} onChange={(e) => this.checkInputPhone(e)}></input>
                 </div>
 
             </form>
